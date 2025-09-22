@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?attr/colorSurface">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/injuries_title"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="?attr/colorOnSurface"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/injuries_subtitle"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            android:elevation="3dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox android:id="@+id/cbBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_back"/>
+                <CheckBox android:id="@+id/cbKnees" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_knees"/>
+                <CheckBox android:id="@+id/cbHip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_hip"/>
+                <CheckBox android:id="@+id/cbShoulder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_shoulder"/>
+                <CheckBox android:id="@+id/cbWrist" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_wrist"/>
+                <CheckBox android:id="@+id/cbNeck" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_neck"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/inj_other">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <CheckBox android:id="@+id/cbNone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/inj_none"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
+            style="@style/TrainUp.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_continue"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

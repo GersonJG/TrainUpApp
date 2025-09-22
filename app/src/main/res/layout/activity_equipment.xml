@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?attr/colorSurface">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/equipment_title"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="?attr/colorOnSurface"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+        <!-- Lugar de entrenamiento -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="12dp"
+            android:elevation="3dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/equipment_place"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"/>
+
+                <RadioGroup
+                    android:id="@+id/rgPlace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+                    <RadioButton android:id="@+id/rbHome" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_home"/>
+                    <RadioButton android:id="@+id/rbGym" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_gym"/>
+                    <RadioButton android:id="@+id/rbOutdoor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_outdoor"/>
+                    <RadioButton android:id="@+id/rbMixed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_mixed"/>
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Equipamiento disponible -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="12dp"
+            android:elevation="3dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/equipment_available"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnSurface"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+                    <CheckBox android:id="@+id/cbBody" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_bodyweight"/>
+                    <CheckBox android:id="@+id/cbDumb" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_dumbbells"/>
+                    <CheckBox android:id="@+id/cbBar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_barbell"/>
+                    <CheckBox android:id="@+id/cbBands" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_bands"/>
+                    <CheckBox android:id="@+id/cbKettlebell" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_kettlebell"/>
+                    <CheckBox android:id="@+id/cbMachines" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_machines"/>
+                    <CheckBox android:id="@+id/cbPullup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_pullup"/>
+                    <CheckBox android:id="@+id/cbTrx" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_trx"/>
+                    <CheckBox android:id="@+id/cbBall" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_ball"/>
+                    <CheckBox android:id="@+id/cbMat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_mat"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinue"
+            style="@style/TrainUp.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_continue"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

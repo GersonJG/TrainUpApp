@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">TrainUpApp</string>
+    <!-- Welcome -->
+    <string name="welcome_title">TrainUP</string>
+    <string name="welcome_subtitle">Tu entrenador personal digital</string>
+    <string name="welcome_description">TrainUP es tu aplicación de fitness personalizada que te ayuda a alcanzar tus objetivos de entrenamiento de manera efectiva y segura.</string>
+    <string name="benefit_1">Rutinas personalizadas para tu nivel</string>
+    <string name="benefit_2">Adaptado a tu equipamiento disponible</string>
+    <string name="benefit_3">Consideración de lesiones y limitaciones</string>
+    <string name="button_continue">Continuar</string>
+    <string name="button_start_caps">COMENZAR</string>
+    <string name="logo_content_desc">Logo de TrainUP</string>
+
+    <!-- Intro -->
+    <string name="intro_title">¿Qué puedes hacer con TrainUP?</string>
+    <string name="intro_subtitle">Descubre todas las funcionalidades que te ayudarán en tu journey fitness</string>
+    <string name="intro_item_objectives">Objetivos Personalizados</string>
+    <string name="intro_item_ai">Rutinas Inteligentes</string>
+    <string name="intro_item_schedule">Planificación Flexible</string>
+    <string name="intro_item_safe">Entrenamiento Seguro</string>
+    <string name="intro_item_progress">Seguimiento de Progreso</string>
+    <string name="intro_item_levels">Para Todos los Niveles</string>
+
+    <!-- Personal Data -->
+    <string name="personal_title">Datos Personales</string>
+    <string name="personal_subtitle">Cuéntanos un poco sobre ti para personalizar tu experiencia</string>
+    <string name="field_name">Nombre</string>
+    <string name="field_age">Edad</string>
+    <string name="field_height">Estatura (cm)</string>
+    <string name="field_weight">Peso (kg)</string>
+    <string name="field_gender">Género</string>
+    <string name="gender_male">Masculino</string>
+    <string name="gender_female">Femenino</string>
+    <string name="gender_other">Otro</string>
+    <string name="error_required_fields">Por favor, completa todos los campos.</string>
+    <string name="error_invalid_ranges">Revisa los rangos: Edad 12-120, Estatura 100-250 cm, Peso 30-300 kg.</string>
+    <string name="bmi_title">Tu IMC</string>
+    <string name="bmi_underweight">Peso insuficiente</string>
+    <string name="bmi_normal">Normal</string>
+    <string name="bmi_overweight">Sobrepeso</string>
+    <string name="bmi_obesity">Obesidad</string>
+
+    <!-- Fitness Data -->
+    <string name="fitness_title">Datos Fitness</string>
+    <string name="fitness_level">Nivel de experiencia</string>
+    <string name="fitness_goal">Objetivo principal</string>
+    <string name="fitness_days">Días disponibles</string>
+    <string name="level_beginner">Principiante</string>
+    <string name="level_intermediate">Intermedio</string>
+    <string name="level_advanced">Avanzado</string>
+    <string name="goal_lose_weight">Perder Peso</string>
+    <string name="goal_gain_muscle">Ganar Músculo</string>
+    <string name="goal_maintain">Mantener Forma</string>
+    <string name="goal_endurance">Mejorar Resistencia</string>
+    <string name="goal_strength">Aumentar Fuerza</string>
+    <string name="days_monday">Lunes</string>
+    <string name="days_tuesday">Martes</string>
+    <string name="days_wednesday">Miércoles</string>
+    <string name="days_thursday">Jueves</string>
+    <string name="days_friday">Viernes</string>
+    <string name="days_saturday">Sábado</string>
+    <string name="days_sunday">Domingo</string>
+    <string name="days_hint_min3">Consejo: Selecciona 3 o más días para mejores resultados (puedes continuar con menos).</string>
+
+    <!-- Equipment -->
+    <string name="equipment_title">Equipamiento</string>
+    <string name="equipment_place">Lugar de entrenamiento</string>
+    <string name="place_home">En casa</string>
+    <string name="place_gym">Gimnasio</string>
+    <string name="place_outdoor">Parque/Al aire libre</string>
+    <string name="place_mixed">Mixto</string>
+    <string name="equipment_available">Equipamiento disponible</string>
+    <string name="eq_bodyweight">Solo cuerpo propio</string>
+    <string name="eq_dumbbells">Mancuernas</string>
+    <string name="eq_barbell">Barra / disco</string>
+    <string name="eq_bands">Bandas de resistencia</string>
+    <string name="eq_kettlebell">Kettlebell</string>
+    <string name="eq_machines">Máquinas de gimnasio</string>
+    <string name="eq_pullup">Zona de dominadas</string>
+    <string name="eq_trx">TRX</string>
+    <string name="eq_ball">Pelota de ejercicio</string>
+    <string name="eq_mat">Colchoneta / Mat</string>
+
+    <!-- Injuries -->
+    <string name="injuries_title">Lesiones</string>
+    <string name="injuries_subtitle">Selecciona si tienes alguna lesión o condición que limite tu entrenamiento</string>
+    <string name="inj_back">Espalda baja</string>
+    <string name="inj_knees">Rodillas</string>
+    <string name="inj_hip">Cadera</string>
+    <string name="inj_shoulder">Hombro</string>
+    <string name="inj_wrist">Muñeca</string>
+    <string name="inj_neck">Cuello</string>
+    <string name="inj_other">Otra</string>
+    <string name="inj_none">No tengo lesiones</string>
+
+    <!-- Preferences -->
+    <string name="prefs_title">Preferencias</string>
+    <string name="prefs_subtitle">Elige cómo quieres crear tu rutina</string>
+    <string name="prefs_ai">Crear rutina con IA</string>
+    <string name="prefs_ai_desc">La inteligencia artificial analiza tus datos para generar una rutina óptima adaptada a tu nivel, objetivo y limitaciones.</string>
+    <string name="prefs_manual">Crear rutina manualmente</string>
+    <string name="prefs_manual_desc">Elige ejercicios, series, repeticiones y días por ti mismo. Ideal si tienes un plan específico.</string>
+    <string name="toast_ready">¡Listo para empezar! Tu plan está listo.</string>
+
+    <!-- Common -->
+    <string name="action_next">Siguiente</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_routine">Rutina</string>
+    <string name="nav_summary">Resumen</string>
+    <string name="nav_profile">Perfil</string>
+
+    <!-- Home -->
+    <string name="home_title">Inicio</string>
+    <string name="home_new_routine">Nueva Rutina</string>
+    <string name="home_quick_actions">Acciones Rápidas</string>
+    <string name="home_recent_workouts">Entrenamientos Recientes</string>
+
+    <!-- Routine -->
+    <string name="routine_title">RUTINA</string>
+    <string name="routine_finish">Finalizar</string>
+    <string name="routine_add_set">+ Agregar serie</string>
+    <string name="routine_chat_ai">Chat con IA</string>
+    <string name="routine_series">Serie</string>
+    <string name="routine_volume">Volumen</string>
+    <string name="routine_reps">Reps</string>
+    <string name="routine_status">Estado</string>
+
+    <!-- Summary -->
+    <string name="summary_title">Resumen de Rutina</string>
+    <string name="summary_muscles">Músculos trabajados</string>
+    <string name="summary_duration">Duración</string>
+    <string name="summary_total_volume">Volumen total</string>
+    <string name="summary_sets_done">Series completadas</string>
+    <string name="summary_save">Guardar rutina</string>
+    <string name="summary_note">Esta sección se mostrará dentro de Rutina de Ejercicio</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Perfil</string>
+    <string name="profile_personal_data">Datos personales</string>
+    <string name="profile_equipment">Equipamiento</string>
+    <string name="profile_injuries">Lesiones</string>
+    <string name="profile_upload_photo">Subir foto</string>
+    <string name="profile_edit_info">Editar información</string>
+    <string name="profile_change_goals">Cambiar objetivos</string>
+
+    <!-- Samples -->
+    <string name="sample_user_name">Usuario</string>
+    <string name="sample_user_age">28 años</string>
+    <string name="sample_user_height">175 cm</string>
+    <string name="sample_user_weight">72 kg</string>
+    <string name="sample_equipment_list">Mancuernas, TRX, Colchoneta</string>
+    <string name="sample_injuries_list">Rodillas (leve)</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="sample_workout_title">Rutina de ejemplo</string>
+    <string name="sample_duration_45">Duración: 45 min</string>
+    <string name="sample_workout_full_body">Full Body</string>
+    <string name="sample_duration_50">Duración: 50 min</string>
+    <string name="sample_workout_legs">Piernas</string>
+    <string name="sample_duration_40">Duración: 40 min</string>
+    <string name="img_content_desc">Imagen ilustrativa</string>
+
+    <string name="sample_muscles">Pecho, Espalda, Piernas</string>
+    <string name="sample_duration_label_50">50 minutos</string>
+    <string name="sample_total_volume_value">10,500 kg</string>
+    <string name="sample_sets_done_value">9 series</string>
+
+    <string name="ex_squat">Sentadilla</string>
+    <string name="ex_squat_desc">Ejercicio básico para piernas</string>
+    <string name="ex_bench">Press banca</string>
+    <string name="ex_bench_desc">Pecho y tríceps</string>
+    <string name="ex_row">Remo con mancuernas</string>
+    <string name="ex_row_desc">Espalda media</string>
+    <string name="table_val_1">1</string>
+    <string name="table_val_2">2</string>
+    <string name="table_val_3">3</string>
+    <string name="table_val_40kg">40 kg</string>
+    <string name="table_val_10">10</string>
+    <string name="table_val_pending">Pendiente</string>
+</resources>

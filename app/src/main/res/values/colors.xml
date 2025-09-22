@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta TrainUP: azul fuerte, blanco y grises para texto -->
+    <color name="trainup_primary">#4285F5</color>
+    <color name="trainup_primary_dark">#2E6CE0</color>
+    <color name="trainup_surface">#FFFFFFFF</color>
+    <color name="trainup_gray_900">#1F2937</color>
+    <color name="trainup_gray_700">#6B7280</color>
+</resources>

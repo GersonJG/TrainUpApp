@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Material icon: psychology (approx bulb/brain) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M13.5,2C9.36,2 6,5.36 6,9.5c0,1.86 0.64,3.57 1.71,4.93L8,19c0,0.55 0.45,1 1,1h5v-2h-4.22l0.19,-1.03 0.15,-0.8 -0.52,-0.63C8.64,13.87 8,11.76 8,9.5 8,6.46 10.46,4 13.5,4S19,6.46 19,9.5 16.54,15 13.5,15H13v2h0.5c4.14,0 7.5,-3.36 7.5,-7.5S17.64,2 13.5,2z"/>
+</vector>
+
