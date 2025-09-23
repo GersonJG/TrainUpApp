@@ -15,16 +15,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import umg.edu.gt.trainupapp.R;
+import umg.edu.gt.trainupapp.data.database.entity.FitnessProfileEntity;
+import umg.edu.gt.trainupapp.data.repository.UserDataRepository;
 import umg.edu.gt.trainupapp.utils.PrefsUtils;
 
 /**
  * FitnessDataActivity
- * Captura nivel, objetivo y días disponibles. Requiere mínimo 1 día; recomienda 3+.
+ * Captura nivel, objetivo y días disponibles.
+ * - Guarda datos en Room (FitnessProfileEntity) usando el userId recibido por Intent.
+ * - Mantiene guardado en Prefs de forma opcional para compatibilidad temporal.
  */
 public class FitnessDataActivity extends AppCompatActivity {
 
     private RadioGroup rgLevel, rgGoal;
     private CheckBox cbMo, cbTu, cbWe, cbTh, cbFr, cbSa, cbSu;
+    private Button btnContinue;
+
+    private UserDataRepository repository;
+    private int userId; // userId pasado desde PersonalDataActivity
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +49,10 @@ public class FitnessDataActivity extends AppCompatActivity {
         cbFr = findViewById(R.id.cbFr);
         cbSa = findViewById(R.id.cbSa);
         cbSu = findViewById(R.id.cbSu);
-        Button btnContinue = findViewById(R.id.btnContinue);
+        btnContinue = findViewById(R.id.btnContinue);
+
+        repository = new UserDataRepository(this);
+        userId = getIntent().getIntExtra("user_id", -1);
 
         btnContinue.setOnClickListener(v -> onContinue());
     }
@@ -60,25 +71,58 @@ public class FitnessDataActivity extends AppCompatActivity {
         if (daysCount < 3) {
             Toast.makeText(this, R.string.days_hint_min3, Toast.LENGTH_LONG).show();
         }
-        JSONObject json = new JSONObject();
-        try {
-            json.put("level", getTextFromChecked(rgLevel));
-            json.put("goal", getTextFromChecked(rgGoal));
-            JSONArray days = new JSONArray();
-            if (cbMo.isChecked()) days.put(getString(R.string.days_monday));
-            if (cbTu.isChecked()) days.put(getString(R.string.days_tuesday));
-            if (cbWe.isChecked()) days.put(getString(R.string.days_wednesday));
-            if (cbTh.isChecked()) days.put(getString(R.string.days_thursday));
-            if (cbFr.isChecked()) days.put(getString(R.string.days_friday));
-            if (cbSa.isChecked()) days.put(getString(R.string.days_saturday));
-            if (cbSu.isChecked()) days.put(getString(R.string.days_sunday));
-            json.put("days", days);
-        } catch (JSONException ignored) {}
-        PrefsUtils.saveJson(this, "fitness_data", json);
 
-        try {
-            startActivity(new android.content.Intent().setClassName(getPackageName(), getPackageName()+".ui.EquipmentActivity"));
-        } catch (android.content.ActivityNotFoundException ignored) {}
+        // Asegurar userId válido antes de guardar
+        if (userId <= 0) {
+            repository.getLatestUserId(uid -> {
+                userId = uid;
+                if (userId <= 0) {
+                    Toast.makeText(this, R.string.error_required_fields, Toast.LENGTH_SHORT).show();
+                } else {
+                    saveAndGo();
+                }
+            });
+        } else {
+            saveAndGo();
+        }
+    }
+
+    private void saveAndGo() {
+        // Construir JSON de días
+        JSONArray days = new JSONArray();
+        if (cbMo.isChecked()) days.put(getString(R.string.days_monday));
+        if (cbTu.isChecked()) days.put(getString(R.string.days_tuesday));
+        if (cbWe.isChecked()) days.put(getString(R.string.days_wednesday));
+        if (cbTh.isChecked()) days.put(getString(R.string.days_thursday));
+        if (cbFr.isChecked()) days.put(getString(R.string.days_friday));
+        if (cbSa.isChecked()) days.put(getString(R.string.days_saturday));
+        if (cbSu.isChecked()) days.put(getString(R.string.days_sunday));
+
+        // Guardar en Room
+        FitnessProfileEntity entity = new FitnessProfileEntity();
+        entity.userId = userId;
+        entity.experienceLevel = getTextFromChecked(rgLevel);
+        entity.goal = getTextFromChecked(rgGoal);
+        entity.availableDays = days.toString();
+
+        repository.upsertFitness(entity, () -> {
+            // Guardado legacy opcional
+            JSONObject json = new JSONObject();
+            try {
+                json.put("level", entity.experienceLevel);
+                json.put("goal", entity.goal);
+                json.put("days", days);
+            } catch (JSONException ignored) {}
+            PrefsUtils.saveJson(this, "fitness_data", json);
+
+            // Navegar a EquipmentActivity con userId
+            try {
+                android.content.Intent intent = new android.content.Intent()
+                        .setClassName(getPackageName(), getPackageName()+".ui.EquipmentActivity");
+                intent.putExtra("user_id", userId);
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ignored) {}
+        });
     }
 
     private String getTextFromChecked(RadioGroup rg) {

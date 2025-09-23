@@ -16,16 +16,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import umg.edu.gt.trainupapp.R;
+import umg.edu.gt.trainupapp.data.database.entity.InjuriesEntity;
+import umg.edu.gt.trainupapp.data.repository.UserDataRepository;
 import umg.edu.gt.trainupapp.utils.PrefsUtils;
 
 /**
  * InjuriesActivity
- * Permite seleccionar lesiones comunes u "Otra" (texto). Opción "No tengo lesiones" anula el resto.
+ * Permite seleccionar lesiones comunes u "Otra". Opción "No tengo lesiones" anula el resto.
+ * Migra almacenamiento a Room (InjuriesEntity) y mantiene guardado opcional en Prefs.
  */
 public class InjuriesActivity extends AppCompatActivity {
 
     private CheckBox cbBack, cbKnees, cbHip, cbShoulder, cbWrist, cbNeck, cbNone;
     private EditText etOther;
+    private Button btnContinue;
+
+    private UserDataRepository repository;
+    private int userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +48,10 @@ public class InjuriesActivity extends AppCompatActivity {
         cbNeck = findViewById(R.id.cbNeck);
         cbNone = findViewById(R.id.cbNone);
         etOther = findViewById(R.id.etOther);
-        Button btnContinue = findViewById(R.id.btnContinue);
+        btnContinue = findViewById(R.id.btnContinue);
+
+        repository = new UserDataRepository(this);
+        userId = getIntent().getIntExtra("user_id", -1);
 
         cbNone.setOnCheckedChangeListener(this::onNoneToggled);
         btnContinue.setOnClickListener(v -> onContinue());
@@ -60,11 +70,12 @@ public class InjuriesActivity extends AppCompatActivity {
 
     private void onContinue() {
         JSONObject json = new JSONObject();
+        boolean noneChecked = cbNone.isChecked();
+        JSONArray list = new JSONArray();
         try {
-            if (cbNone.isChecked()) {
+            if (noneChecked) {
                 json.put("none", true);
             } else {
-                JSONArray list = new JSONArray();
                 if (cbBack.isChecked()) list.put(getString(R.string.inj_back));
                 if (cbKnees.isChecked()) list.put(getString(R.string.inj_knees));
                 if (cbHip.isChecked()) list.put(getString(R.string.inj_hip));
@@ -77,10 +88,35 @@ public class InjuriesActivity extends AppCompatActivity {
             }
         } catch (JSONException ignored) {}
 
-        PrefsUtils.saveJson(this, "injuries_data", json);
+        // Asegurar userId válido
+        if (userId <= 0) {
+            repository.getLatestUserId(uid -> {
+                userId = uid;
+                persistAndGo(json, noneChecked, list);
+            });
+        } else {
+            persistAndGo(json, noneChecked, list);
+        }
+    }
 
-        try {
-            startActivity(new android.content.Intent().setClassName(getPackageName(), getPackageName()+".ui.PreferencesActivity"));
-        } catch (android.content.ActivityNotFoundException ignored) {}
+    private void persistAndGo(JSONObject json, boolean noneChecked, JSONArray list) {
+        // Guardar en Room
+        InjuriesEntity entity = new InjuriesEntity();
+        entity.userId = userId;
+        entity.hasInjuries = !noneChecked;
+        entity.injuriesList = noneChecked ? "[]" : list.toString();
+
+        repository.upsertInjuries(entity, () -> {
+            // Guardado legacy opcional
+            PrefsUtils.saveJson(this, "injuries_data", json);
+
+            // Navegar a PreferencesActivity con userId
+            try {
+                android.content.Intent intent = new android.content.Intent()
+                        .setClassName(getPackageName(), getPackageName()+".ui.PreferencesActivity");
+                intent.putExtra("user_id", userId);
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ignored) {}
+        });
     }
 }

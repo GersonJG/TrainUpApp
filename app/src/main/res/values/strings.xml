@@ -103,7 +103,7 @@
     <string name="toast_ready">¡Listo para empezar! Tu plan está listo.</string>
 
     <!-- Common -->
-    <string name="action_next">Siguiente</string>
+    <string name="action_next">Guardar cambios</string>
     <string name="nav_home">Inicio</string>
     <string name="nav_routine">Rutina</string>
     <string name="nav_summary">Resumen</string>
@@ -142,6 +142,20 @@
     <string name="profile_upload_photo">Subir foto</string>
     <string name="profile_edit_info">Editar información</string>
     <string name="profile_change_goals">Cambiar objetivos</string>
+
+    <!-- Mensajes de error específicos del Perfil -->
+    <string name="error_name_generic">El nombre es obligatorio y debe tener entre 2 y 50 caracteres. Solo letras y espacios.</string>
+    <string name="error_age_range">La edad debe estar entre 12 y 120 años</string>
+    <string name="error_height_range">La altura debe estar entre 100 y 250 cm (máximo un decimal)</string>
+    <string name="error_weight_range">El peso debe estar entre 30 y 300 kg (máximo un decimal)</string>
+    <string name="error_select_gender">Selecciona un género</string>
+    <string name="error_select_days">Selecciona al menos un día disponible</string>
+    <string name="error_select_place">Selecciona un lugar de entrenamiento</string>
+    <string name="error_select_equipment">Selecciona al menos un tipo de equipamiento</string>
+    <string name="error_other_injury">Describe la lesión sin caracteres especiales y máximo 100 caracteres</string>
+
+    <!-- Confirmación -->
+    <string name="msg_data_updated">Datos actualizados</string>
 
     <!-- Samples -->
     <string name="sample_user_name">Usuario</string>

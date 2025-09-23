@@ -18,16 +18,20 @@ import org.json.JSONObject;
 import java.util.Locale;
 
 import umg.edu.gt.trainupapp.R;
+import umg.edu.gt.trainupapp.data.database.entity.UserEntity;
+import umg.edu.gt.trainupapp.data.repository.UserDataRepository;
 import umg.edu.gt.trainupapp.utils.PrefsUtils;
 
 /**
  * PersonalDataActivity
- * Captura datos personales del usuario, calcula IMC y guarda en SharedPreferences.
+ * Captura datos personales del usuario, calcula IMC y guarda en Room (UserEntity).
+ * Nota: Mantiene PrefsUtils solo para compatibilidad mínima/temporal, pero la fuente de verdad es Room.
  */
 public class PersonalDataActivity extends AppCompatActivity {
 
     private EditText etName, etAge, etHeight, etWeight; // Campos de texto
     private RadioGroup rgGender;                        // Selección de género
+    private UserDataRepository repository;              // Acceso a Room
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class PersonalDataActivity extends AppCompatActivity {
         rgGender = findViewById(R.id.rgGender);
         Button btnContinue = findViewById(R.id.btnContinue);
 
+        // Inicializar repositorio de datos (Room)
+        repository = new UserDataRepository(this);
+
         // Filtros/inputs
         etAge.setInputType(InputType.TYPE_CLASS_NUMBER);
         etHeight.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -52,7 +59,7 @@ public class PersonalDataActivity extends AppCompatActivity {
     }
 
     /**
-     * Valida, calcula IMC, muestra diálogo y guarda datos; luego navega a FitnessDataActivity.
+     * Valida, calcula IMC, muestra diálogo y guarda datos en Room; luego navega a FitnessDataActivity.
      */
     private void onContinue() {
         String name = etName.getText().toString().trim();
@@ -87,24 +94,40 @@ public class PersonalDataActivity extends AppCompatActivity {
                     .setTitle(R.string.bmi_title)
                     .setMessage(String.format(Locale.getDefault(), "IMC: %.1f\n%s", bmi, category))
                     .setPositiveButton(R.string.button_continue, (d, w) -> {
-                        // Guardar en SharedPreferences como JSON
-                        JSONObject json = new JSONObject();
-                        try {
-                            json.put("name", name);
-                            json.put("age", age);
-                            json.put("heightCm", height);
-                            json.put("weightKg", weight);
-                            String gender = ((RadioButton) findViewById(genderId)).getText().toString();
-                            json.put("gender", gender);
-                            json.put("bmi", bmi);
-                            json.put("bmiCategory", category);
-                        } catch (JSONException ignored) {}
-                        PrefsUtils.saveJson(this, "user_data", json);
+                        String gender = ((RadioButton) findViewById(genderId)).getText().toString();
 
-                        // Navegar a FitnessDataActivity
-                        try {
-                            startActivity(new android.content.Intent().setClassName(getPackageName(), getPackageName()+".ui.FitnessDataActivity"));
-                        } catch (android.content.ActivityNotFoundException ignored) {}
+                        // 1) Guardar en Room (UserEntity)
+                        UserEntity entity = new UserEntity();
+                        entity.name = name;
+                        entity.age = age;
+                        entity.height = height;
+                        entity.weight = weight;
+                        entity.gender = gender;
+                        entity.imc = bmi;
+                        entity.imcCategory = category;
+
+                        repository.insertUser(entity, userId -> {
+                            // 2) Guardado legacy opcional (compatibilidad)
+                            JSONObject json = new JSONObject();
+                            try {
+                                json.put("name", name);
+                                json.put("age", age);
+                                json.put("heightCm", height);
+                                json.put("weightKg", weight);
+                                json.put("gender", gender);
+                                json.put("bmi", bmi);
+                                json.put("bmiCategory", category);
+                            } catch (JSONException ignored) {}
+                            PrefsUtils.saveJson(this, "user_data", json);
+
+                            // 3) Navegar a FitnessDataActivity pasando userId
+                            try {
+                                android.content.Intent intent = new android.content.Intent()
+                                        .setClassName(getPackageName(), getPackageName()+".ui.FitnessDataActivity");
+                                intent.putExtra("user_id", userId);
+                                startActivity(intent);
+                            } catch (android.content.ActivityNotFoundException ignored) {}
+                        });
                     })
                     .setCancelable(false)
                     .show();

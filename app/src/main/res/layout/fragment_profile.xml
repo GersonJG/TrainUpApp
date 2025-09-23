@@ -12,6 +12,7 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/tvProfileTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/profile_title"
@@ -37,6 +38,7 @@
 
         <!-- Datos personales -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPersonal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -54,29 +56,152 @@
                     android:layout_height="wrap_content"
                     android:text="@string/profile_personal_data"
                     android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sample_user_name"
-                    android:layout_marginTop="4dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sample_user_age"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sample_user_height"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sample_user_weight"/>
 
+                <!-- Vista de solo lectura -->
+                <LinearLayout
+                    android:id="@+id/groupPersonalRead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sample_user_name"/>
+                    <TextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sample_user_age"/>
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sample_user_height"/>
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sample_user_weight"/>
+                    <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/field_gender"/>
+                    <TextView
+                        android:id="@+id/tvBmi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="IMC: —"/>
+                </LinearLayout>
+
+                <!-- Vista editable -->
+                <LinearLayout
+                    android:id="@+id/groupPersonalEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilName"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/field_name"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilAge"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etAge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="@string/field_age"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilHeight"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etHeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:hint="@string/field_height"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilWeight"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etWeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:hint="@string/field_weight"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvGenderLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/field_gender"
+                        android:layout_marginTop="8dp"/>
+                    <RadioGroup
+                        android:id="@+id/rgGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RadioButton
+                            android:id="@+id/rbMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender_male"/>
+                        <RadioButton
+                            android:id="@+id/rbFemale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender_female"/>
+                        <RadioButton
+                            android:id="@+id/rbOther"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender_other"/>
+                    </RadioGroup>
+                    <TextView
+                        android:id="@+id/tvGenderError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:visibility="gone"
+                        android:text=""/>
+                </LinearLayout>
+
+                <!-- Controles -->
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="12dp">
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnEditInfo"
                         android:layout_width="0dp"
@@ -94,11 +219,11 @@
                         android:backgroundTint="?attr/colorPrimary"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnChangeGoals"
+                        android:id="@+id/btnSave"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/profile_change_goals"
+                        android:text="@string/action_next"
                         android:textAllCaps="false"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnPrimary"
@@ -108,14 +233,102 @@
                         app:cornerRadius="16dp"
                         app:rippleColor="?attr/colorPrimaryContainer"
                         android:backgroundTint="?attr/colorPrimary"
-                        android:layout_marginStart="12dp"/>
+                        android:layout_marginStart="12dp"
+                        android:visibility="gone"/>
+                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@android:string/cancel"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:insetTop="12dp"
+                    android:insetBottom="12dp"
+                    android:elevation="2dp"
+                    app:cornerRadius="16dp"
+                    app:rippleColor="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Datos Fitness (Nivel/Objetivo solo lectura; Días editables) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardFitness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="12dp"
+            android:elevation="3dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fitness_title"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/level_beginner"/>
+                <TextView
+                    android:id="@+id/tvGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/goal_maintain"/>
+
+                <TextView
+                    android:id="@+id/tvDaysLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fitness_days"
+                    android:layout_marginTop="8dp"/>
+
+                <LinearLayout
+                    android:id="@+id/groupDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+                    <CheckBox android:id="@+id/cbMo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_monday"/>
+                    <CheckBox android:id="@+id/cbTu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_tuesday"/>
+                    <CheckBox android:id="@+id/cbWe" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_wednesday"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox android:id="@+id/cbTh" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_thursday"/>
+                    <CheckBox android:id="@+id/cbFr" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_friday"/>
+                    <CheckBox android:id="@+id/cbSa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_saturday"/>
+                    <CheckBox android:id="@+id/cbSu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/days_sunday"/>
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tvDaysError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
+                    android:text=""/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Equipamiento -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardEquipment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -133,16 +346,83 @@
                     android:layout_height="wrap_content"
                     android:text="@string/profile_equipment"
                     android:textStyle="bold"/>
+
+                <!-- Lectura -->
                 <TextView
+                    android:id="@+id/tvPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sample_equipment_list"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="4dp"
+                    android:text="@string/place_home"/>
+                <TextView
+                    android:id="@+id/tvEquipmentList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_equipment_list"/>
+
+                <!-- Edición -->
+                <TextView
+                    android:id="@+id/tvPlaceLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/equipment_place"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+                <RadioGroup
+                    android:id="@+id/rgPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <RadioButton android:id="@+id/rbHome" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_home"/>
+                    <RadioButton android:id="@+id/rbGym" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_gym"/>
+                    <RadioButton android:id="@+id/rbOutdoor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_outdoor"/>
+                    <RadioButton android:id="@+id/rbMixed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/place_mixed"/>
+                </RadioGroup>
+                <TextView
+                    android:id="@+id/tvPlaceError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
+                    android:text=""/>
+
+                <TextView
+                    android:id="@+id/tvEquipmentLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/equipment_available"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"/>
+                <LinearLayout
+                    android:id="@+id/groupEquipment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <CheckBox android:id="@+id/cbBody" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_bodyweight"/>
+                    <CheckBox android:id="@+id/cbDumb" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_dumbbells"/>
+                    <CheckBox android:id="@+id/cbBar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_barbell"/>
+                    <CheckBox android:id="@+id/cbBands" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_bands"/>
+                    <CheckBox android:id="@+id/cbKettlebell" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_kettlebell"/>
+                    <CheckBox android:id="@+id/cbMachines" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_machines"/>
+                    <CheckBox android:id="@+id/cbPullup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_pullup"/>
+                    <CheckBox android:id="@+id/cbTrx" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_trx"/>
+                    <CheckBox android:id="@+id/cbBall" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_ball"/>
+                    <CheckBox android:id="@+id/cbMat" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/eq_mat"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvEquipmentError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
+                    android:text=""/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Lesiones -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardInjuries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -160,11 +440,52 @@
                     android:layout_height="wrap_content"
                     android:text="@string/profile_injuries"
                     android:textStyle="bold"/>
+
+                <!-- Lectura -->
                 <TextView
+                    android:id="@+id/tvInjuriesList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sample_injuries_list"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="4dp"
+                    android:text="@string/sample_injuries_list"/>
+
+                <!-- Edición -->
+                <LinearLayout
+                    android:id="@+id/groupInjuries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp">
+                    <CheckBox android:id="@+id/cbBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_back"/>
+                    <CheckBox android:id="@+id/cbKnees" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_knees"/>
+                    <CheckBox android:id="@+id/cbHip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_hip"/>
+                    <CheckBox android:id="@+id/cbShoulder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_shoulder"/>
+                    <CheckBox android:id="@+id/cbWrist" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_wrist"/>
+                    <CheckBox android:id="@+id/cbNeck" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_neck"/>
+                    <CheckBox android:id="@+id/cbNone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inj_none"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilOtherInjury"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etOtherInjury"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/inj_other"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvInjuriesError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
+                    android:text=""/>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

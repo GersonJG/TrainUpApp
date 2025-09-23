@@ -14,16 +14,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import umg.edu.gt.trainupapp.R;
+import umg.edu.gt.trainupapp.data.database.entity.EquipmentEntity;
+import umg.edu.gt.trainupapp.data.repository.UserDataRepository;
 import umg.edu.gt.trainupapp.utils.PrefsUtils;
 
 /**
  * EquipmentActivity
- * Captura lugar y equipamiento disponible; guarda en SharedPreferences y navega a InjuriesActivity.
+ * Captura lugar y equipamiento disponible; guarda en Room (EquipmentEntity) y navega a InjuriesActivity.
+ * Mantiene Prefs opcional para compatibilidad.
  */
 public class EquipmentActivity extends AppCompatActivity {
 
     private RadioGroup rgPlace;
     private CheckBox cbBody, cbDumb, cbBar, cbBands, cbKettlebell, cbMachines, cbPullup, cbTrx, cbBall, cbMat;
+    private Button btnContinue;
+
+    private UserDataRepository repository;
+    private int userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,17 +49,21 @@ public class EquipmentActivity extends AppCompatActivity {
         cbTrx = findViewById(R.id.cbTrx);
         cbBall = findViewById(R.id.cbBall);
         cbMat = findViewById(R.id.cbMat);
-        Button btnContinue = findViewById(R.id.btnContinue);
+        btnContinue = findViewById(R.id.btnContinue);
+
+        repository = new UserDataRepository(this);
+        userId = getIntent().getIntExtra("user_id", -1);
 
         btnContinue.setOnClickListener(v -> onContinue());
     }
 
     private void onContinue() {
+        // Construir JSON de equipamiento
         JSONObject json = new JSONObject();
+        JSONArray eq = new JSONArray();
         try {
             String place = getTextFromChecked(rgPlace);
             json.put("place", place);
-            JSONArray eq = new JSONArray();
             if (cbBody.isChecked()) eq.put(getString(R.string.eq_bodyweight));
             if (cbDumb.isChecked()) eq.put(getString(R.string.eq_dumbbells));
             if (cbBar.isChecked()) eq.put(getString(R.string.eq_barbell));
@@ -65,11 +76,37 @@ public class EquipmentActivity extends AppCompatActivity {
             if (cbMat.isChecked()) eq.put(getString(R.string.eq_mat));
             json.put("equipment", eq);
         } catch (JSONException ignored) {}
-        PrefsUtils.saveJson(this, "equipment_data", json);
 
-        try {
-            startActivity(new android.content.Intent().setClassName(getPackageName(), getPackageName()+".ui.InjuriesActivity"));
-        } catch (android.content.ActivityNotFoundException ignored) {}
+        // Asegurar userId válido; si no viene por Intent, usar el último
+        if (userId <= 0) {
+            repository.getLatestUserId(uid -> {
+                userId = uid;
+                persistAndGo(json, eq);
+            });
+        } else {
+            persistAndGo(json, eq);
+        }
+    }
+
+    private void persistAndGo(JSONObject json, JSONArray eq) {
+        // Guardar en Room
+        EquipmentEntity entity = new EquipmentEntity();
+        entity.userId = userId;
+        entity.trainingLocation = json.optString("place", "");
+        entity.availableEquipment = eq.toString();
+
+        repository.upsertEquipment(entity, () -> {
+            // Guardado legacy opcional
+            PrefsUtils.saveJson(this, "equipment_data", json);
+
+            // Navegar a InjuriesActivity con userId
+            try {
+                android.content.Intent intent = new android.content.Intent()
+                        .setClassName(getPackageName(), getPackageName()+".ui.InjuriesActivity");
+                intent.putExtra("user_id", userId);
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ignored) {}
+        });
     }
 
     private String getTextFromChecked(RadioGroup rg) {
