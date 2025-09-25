@@ -51,7 +51,7 @@ public class PreferencesActivity extends AppCompatActivity {
         }
 
         try {
-            startActivity(new android.content.Intent().setClassName(getPackageName(), getPackageName()+".ui.MainActivity"));
+            startActivity(new android.content.Intent().setClassName(getPackageName(), getPackageName()+".ui.SplashActivity"));
         } catch (android.content.ActivityNotFoundException ignored) {}
     }
 }

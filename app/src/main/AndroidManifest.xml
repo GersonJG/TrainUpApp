@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Permiso necesario para realizar peticiones HTTP a la API pública de wger -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,6 +35,10 @@
 
         <!-- MainActivity (mockup principal con BottomNavigation) -->
         <activity android:name=".ui.MainActivity" android:exported="false" />
+
+        <!-- Splash y Select Exercise Activities -->
+        <activity android:name=".ui.SplashActivity" android:exported="false" />
+        <activity android:name=".ui.SelectExerciseActivity" android:exported="false" />
 
     </application>
 

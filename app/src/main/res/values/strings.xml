@@ -190,4 +190,21 @@
     <string name="table_val_40kg">40 kg</string>
     <string name="table_val_10">10</string>
     <string name="table_val_pending">Pendiente</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_sync_title">Sincronizando ejercicios</string>
+    <string name="splash_sync_message">Descargando datos, por favor espera...</string>
+    <string name="splash_sync_existing">Datos locales encontrados. Saltando sincronización…</string>
+    <string name="splash_error">Error de conexión. Reintentar</string>
+    <string name="action_retry">Reintentar</string>
+
+    <!-- Select Exercise -->
+    <string name="select_exercise_title">Agregar Ejercicio</string>
+    <string name="select_exercise_search_hint">Buscar ejercicio...</string>
+    <string name="select_exercise_no_results">Sin resultados</string>
+    <string name="select_exercise_chip_equipment">Equipamiento (Próximamente)</string>
+    <string name="select_exercise_chip_muscles">Músculos (Próximamente)</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_create">Crear</string>
+    <string name="toast_routine_created">Rutina creada (mockup)</string>
 </resources>

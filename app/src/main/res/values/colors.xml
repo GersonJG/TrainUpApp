@@ -9,4 +9,7 @@
     <color name="trainup_surface">#FFFFFFFF</color>
     <color name="trainup_gray_900">#1F2937</color>
     <color name="trainup_gray_700">#6B7280</color>
+    <color name="trainup_item_selected_bg">#334285F5</color>
+    <color name="trainup_divider">#FFE0E0E0</color>
+    <color name="trainup_placeholder_circle">#FFB0B8C1</color>
 </resources>

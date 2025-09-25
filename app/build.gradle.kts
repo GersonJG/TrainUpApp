@@ -43,6 +43,19 @@ dependencies {
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
 
+    // Gson para TypeConverters de listas (IDs de músculos, equipamiento, etc.)
+    implementation(libs.gson)
+
+    // Retrofit + Gson converter para consumo de API wger
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson) // alias corregido
+    // OkHttp Logging Interceptor (solo útil en debug, se condiciona en el builder)
+    implementation(libs.okhttp.logging) // alias corregido
+
+    // Glide para carga de imágenes
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
